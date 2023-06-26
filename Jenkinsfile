@@ -6,7 +6,6 @@ pipeline {
   stages { 
     stage('clone repository') {
       steps {
-      withCredentials([gitUsernamePassword(credentialsId: 'pipeline-gallery-credentials', gitToolName: 'git-tool')]) {
           git 'https://github.com/victorkimanthi/gallery'
       }
      }
