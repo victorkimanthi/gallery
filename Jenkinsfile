@@ -5,9 +5,11 @@ pipeline {
     }
   stages { 
     stage('clone repository') {
-      steps { 
-        git 'https://github.com/victorkimanthi/gallery'
+      steps {
+      withCredentials([gitUsernamePassword(credentialsId: 'pipeline-gallery-credentials', gitToolName: 'Default')]) {
+          git 'https://github.com/victorkimanthi/gallery'
       }
+     }
     }
      stage('install dependencies') {
           steps {
