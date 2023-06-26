@@ -1,5 +1,9 @@
 pipeline { 
   agent any
+
+  triggers {
+  pollSCM(*/30 * * * *')
+  }
   tools {
       nodejs "20.3.1"
     }
