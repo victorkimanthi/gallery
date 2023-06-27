@@ -1,4 +1,8 @@
-pipeline { 
+pipeline {
+
+environment {
+   siteLink = 'https://app-gallery-b1af698fffe2.herokuapp.com/'
+}
   agent any
   triggers {
   pollSCM('0 */4 * * 1-5')
@@ -27,5 +31,12 @@ pipeline {
             }
           }
         }
+  }
+  post {
+      success {
+          slackSend channel: '#victork_ip1',
+                    color: 'good',
+                    message: "The pipeline ${currentBuild.fullDisplayName} build ${env.BUILD_NUMBER} completed successfully.The site link is ${siteLink}"
+      }
   }
 }
