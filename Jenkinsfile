@@ -44,5 +44,15 @@ environment {
                     color: 'good',
                     message: "The pipeline ${currentBuild.fullDisplayName} build ${env.BUILD_NUMBER} completed successfully.The site link is ${siteLink}"
       }
+
+       failure {
+                   slackSend channel: '#victork_ip1',
+                                      color: 'danger',
+                                      message: "The pipeline ${currentBuild.fullDisplayName} build ${env.BUILD_NUMBER} failed.The site link is ${siteLink}"
+
+               mail to: 'victorkimanthi556@gmail.com',
+                           subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
+                           body: "Something is wrong with ${env.BUILD_URL}"
+              }
   }
 }
